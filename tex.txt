@@ -1,0 +1,28 @@
+// IT =============
+ 
+->>>> Frontend Developer  -> HTML, CSS , JS 
+JS Framework ///////
+1 React JS
+2 Vue Js 
+3 Angular JS ===> Class base (OOP )   
+
+---- API  
+
+---> Backend Developer -> HTML ,Css , 
+->language 
+1 Node Js 
+2 php                               The Fullstack Devex`loper
+3 python
+4 java  
+5 C , C# , C++
+
+--database 
+mysql
+oricle 
+post
+
+mongodb
+
+
+
+
