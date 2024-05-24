@@ -34,3 +34,26 @@ export const useLogin = () => {
     },
   });
 };
+
+interface registerProp {
+  username: string;
+  email: string;
+  password: string;
+  password_confirmation: string;
+}
+
+const register = async (payload: registerProp) => {
+  const data = await axios.post("register", payload, {
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    },
+  });
+  return data;
+};
+
+export const useRegister = () => {
+  return useMutation({
+    mutationFn: (payload: registerProp) => register(payload),
+  });
+};

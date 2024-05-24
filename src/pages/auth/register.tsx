@@ -8,6 +8,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { useRegister } from "@/store/server/auth/mutation";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { useForm } from "react-hook-form";
@@ -40,11 +41,18 @@ const Register = ({
       password_confirmation: "",
     },
   });
+  const register = useRegister();
 
   return (
     <Form {...form}>
       <h4 className=" font-bold">Create Your Account</h4>
-      <form onSubmit={form.handleSubmit((value) => console.log(value))}>
+      <form
+        onSubmit={form.handleSubmit((value) =>
+          register.mutate(value, {
+            onSuccess: () => setAuthState("login"),
+          })
+        )}
+      >
         <div className=" grid grid-cols-12 gap-4 ">
           <div className=" col-span-6">
             <FormField
