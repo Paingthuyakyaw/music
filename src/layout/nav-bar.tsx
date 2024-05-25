@@ -10,6 +10,7 @@ import { IconSearch } from "@tabler/icons-react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
+import { useMe } from "@/store/server/auth/mutation";
 const Navbar = () => {
   const navigate = useNavigate();
   const [search, setSearch] = useState("");
@@ -19,6 +20,10 @@ const Navbar = () => {
   };
 
   const auth = Cookies.get("user");
+
+  const { data: me } = useMe();
+
+  console.log(me);
 
   const handleLogout = () => {
     logout();
@@ -49,7 +54,9 @@ const Navbar = () => {
                   className=" w-8 h-8 rounded-full"
                 />
                 <div>
-                  <p className=" font-semibold text-[12px] text-white">Lucas</p>
+                  <p className=" font-semibold text-[12px] text-white">
+                    {me?.data?.username}
+                  </p>
                 </div>
               </div>
             </PopoverTrigger>

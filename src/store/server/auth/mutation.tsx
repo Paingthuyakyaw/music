@@ -1,6 +1,6 @@
-import { axios } from "@/api/axio";
+import { authJsonHeader, axios } from "@/api/axio";
 import { useAuthStore } from "@/store/client/useStore";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { toast } from "sonner";
 
 interface AuthProp {
@@ -55,5 +55,19 @@ const register = async (payload: registerProp) => {
 export const useRegister = () => {
   return useMutation({
     mutationFn: (payload: registerProp) => register(payload),
+  });
+};
+
+const me = async () => {
+  const { data } = await axios.get("me", {
+    headers: authJsonHeader(),
+  });
+  return data;
+};
+
+export const useMe = () => {
+  return useQuery({
+    queryKey: ["me"],
+    queryFn: () => me(),
   });
 };
