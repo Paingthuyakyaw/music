@@ -6,7 +6,7 @@ export const axios = Axios.create({
 });
 
 export const authJsonHeader = (file?: boolean) => {
-  const cookieState = Cookies.get("token");
+  const cookieState = Cookies.get("user");
   console.log(cookieState);
 
   const token = cookieState ? JSON.parse(cookieState) : "";

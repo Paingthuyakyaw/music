@@ -1,35 +1,15 @@
 import MusicPlayer from "@/components/playmusic";
-import { useAuthStore } from "@/store/client/useStore";
-import {
-  useAddFavourite,
-  useDeleteFavourite,
-} from "@/store/server/favourite/mutation";
+
 import { useMusic } from "@/store/server/music/query";
-import {
-  IconHeart,
-  IconHeartFilled,
-  IconPlayerPlayFilled,
-} from "@tabler/icons-react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import FavIcon from "./components/fav-icon";
 
 const Home = () => {
   const [currentSongIndex, setCurrentSongIndex] = useState(0); //global state
   const [isPlaying, setIsPlaying] = useState(false);
   const [isOpen, setOpen] = useState(false);
-  const [fav, setFav] = useState(
-    JSON.parse(localStorage.getItem("fav") || "false") || false
-  );
-  const { auth } = useAuthStore();
 
   const { data } = useMusic();
-
-  const addFav = useAddFavourite();
-
-  const deleteFav = useDeleteFavourite();
-
-  useEffect(() => {
-    localStorage.setItem("fav", JSON.stringify(fav));
-  }, [fav]);
 
   const handleSongClick = (idx: number) => {
     setCurrentSongIndex(idx);
@@ -58,43 +38,11 @@ const Home = () => {
           return (
             <div className=" group relative" key={index}>
               <div className=" hidden  group-hover:flex items-center absolute top-2 justify-between w-full px-2">
-                <IconPlayerPlayFilled
-                  size={30}
-                  onClick={() => handleSongClick(index)}
-                  className=" bg-white p-1 cursor-pointer  rounded-full text-red-500"
+                <FavIcon
+                  song={song}
+                  index={index}
+                  handleSongClick={handleSongClick}
                 />
-                {auth && (
-                  <>
-                    {fav ? (
-                      <>
-                        <IconHeartFilled
-                          onClick={() => {
-                            deleteFav.mutate(Number(song.id), {
-                              onSuccess: () => setFav(false),
-                            });
-                          }}
-                          size={30}
-                          className=" bg-white p-1 cursor-pointer  rounded-full text-red-500"
-                        />
-                      </>
-                    ) : (
-                      <IconHeart
-                        onClick={() => {
-                          addFav.mutate(
-                            { music_id: Number(song.id) },
-                            {
-                              onSuccess: () => {
-                                setFav(true);
-                              },
-                            }
-                          );
-                        }}
-                        size={30}
-                        className=" bg-white p-1 cursor-pointer  rounded-full text-red-500"
-                      />
-                    )}
-                  </>
-                )}
               </div>
               <div key={index} className=" col-span-1">
                 <img

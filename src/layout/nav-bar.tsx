@@ -18,11 +18,11 @@ const Navbar = () => {
     navigate(`/search/${search}`);
   };
 
-  const auth = Cookies.get("token");
+  const auth = Cookies.get("user");
 
   const handleLogout = () => {
     logout();
-    Cookies.remove("token");
+    Cookies.remove("user");
     navigate("/");
     window.location.reload();
   };

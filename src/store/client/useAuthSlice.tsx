@@ -8,7 +8,7 @@ export interface AuthSlice {
 }
 
 export const createAuthSLice: StateCreator<AuthSlice> = (set) => {
-  const cookies = Cookie.get("token");
+  const cookies = Cookie.get("user");
 
   const intialAuth = cookies ? JSON.parse(cookies) : "";
 
@@ -16,12 +16,12 @@ export const createAuthSLice: StateCreator<AuthSlice> = (set) => {
     auth: intialAuth,
     setAuth: (auth) =>
       set((state) => {
-        Cookie.set("token", JSON.stringify(auth), { expires: 5 });
+        Cookie.set("user", JSON.stringify(auth), { expires: 5 });
         return { ...state, auth };
       }),
     resetAuth: () =>
       set((state) => {
-        Cookie.remove("token");
+        Cookie.remove("user");
         return { ...state, auth: intialAuth };
       }),
   };
