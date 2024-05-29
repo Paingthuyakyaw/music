@@ -31,8 +31,14 @@ const FavIcon = ({
 
   useEffect(() => {
     const favs = JSON.parse(localStorage.getItem("fav") || "{}");
-    favs[song.id] = fav;
-    localStorage.setItem("fav", JSON.stringify(favs));
+
+    // Ensure favs is an object before trying to set a property on it
+    if (typeof favs === "object" && favs !== null) {
+      favs[song.id] = fav;
+      localStorage.setItem("fav", JSON.stringify(favs));
+    } else {
+      console.error("Expected favs to be an object", favs);
+    }
   }, [fav, song.id]);
 
   return (

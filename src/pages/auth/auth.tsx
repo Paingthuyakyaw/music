@@ -60,7 +60,9 @@ const Auth = ({ open, setOpen }: authProp) => {
               <h4 className=" font-bold">Login Your Account</h4>
               <form
                 onSubmit={loginForm.handleSubmit((value) =>
-                  login.mutate(value)
+                  login.mutate(value, {
+                    onSuccess: () => setOpen(false),
+                  })
                 )}
               >
                 <div className=" space-y-2 ">

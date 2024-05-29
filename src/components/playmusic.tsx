@@ -10,14 +10,12 @@ import {
 
 interface songProp {
   name: string;
-  artist ? : string;
+  artist?: string;
   song_mp3: string;
   description: string;
   song_image: string;
-  artist_image ? : string;
+  artist_image?: string;
 }
-
-
 
 const MusicPlayer = ({
   song,
@@ -55,13 +53,11 @@ const MusicPlayer = ({
   };
 
   const formatTime = (time: number) => {
-    console.log("Input time:", time);
     const minutes = Math.floor(time / 60);
     const seconds = Math.floor(time % 60);
     const formattedTime = `${String(minutes).padStart(2, "0")}:${String(
       seconds
     ).padStart(2, "0")}`;
-    console.log("Formatted time:", formattedTime);
     return formattedTime;
   };
 

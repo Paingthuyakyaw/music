@@ -27,7 +27,6 @@ export const useLogin = () => {
     onSuccess: (data) => {
       toast.success("Login Successfully");
       setAuth(data?.data.token);
-      window.location.reload();
     },
     onError: () => {
       console.log("err");

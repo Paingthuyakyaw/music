@@ -12,6 +12,9 @@ const Favourite = () => {
   const [currentSongIndex, setCurrentSongIndex] = useState(0); //global state
   const [isPlaying, setIsPlaying] = useState(false);
   const [isOpen, setOpen] = useState(false);
+  const [modalOpen, setModalOpen] = useState(auth ? false : true);
+
+  const { data } = useFavouriteList();
 
   const handleSongClick = (idx: number) => {
     setCurrentSongIndex(idx);
@@ -20,8 +23,7 @@ const Favourite = () => {
   };
 
   const playNext = () => {
-    if (data?.data)
-      setCurrentSongIndex((prevIndex) => (prevIndex + 1) % data?.data.length);
+    setCurrentSongIndex((prevIndex) => (prevIndex + 1) % data?.data.length);
   };
 
   const playPrev = () => {
@@ -29,11 +31,7 @@ const Favourite = () => {
       setCurrentSongIndex((prevIndex) => (prevIndex - 1) % data?.data.length);
   };
 
-  const [modalOpen, setModalOpen] = useState(auth ? false : true);
-
-  const { data } = useFavouriteList();
-
-  console.log(data);
+  console.log(currentSongIndex);
 
   return (
     <>
@@ -64,12 +62,12 @@ const Favourite = () => {
             <div className=" mt-5 grid grid-cols-5 gap-5">
               {data?.data.map((song: any, index: number) => {
                 return (
-                  <div
-                    onClick={() => handleSongClick(index)}
-                    className=" group relative"
-                    key={index}
-                  >
-                    <div key={index} className=" col-span-1">
+                  <div className=" group relative" key={index}>
+                    <div
+                      onClick={() => handleSongClick(index)}
+                      key={index}
+                      className=" col-span-1"
+                    >
                       <img
                         src={song?.song_image}
                         alt={song.name}
