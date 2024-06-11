@@ -9,7 +9,11 @@ const Home = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isOpen, setOpen] = useState(false);
 
-  const { data } = useMusic();
+  const { data, isPending } = useMusic();
+
+  if (isPending) {
+    return;
+  }
 
   const handleSongClick = (idx: number) => {
     setCurrentSongIndex(idx);
@@ -34,7 +38,7 @@ const Home = () => {
       </div>
 
       <div className=" mt-5 grid grid-cols-5 gap-5">
-        {data?.data.map((song, index) => {
+        {data?.data?.map((song, index) => {
           return (
             <div className=" group relative" key={index}>
               <div className=" hidden  group-hover:flex items-center absolute top-2 justify-between w-full px-2">

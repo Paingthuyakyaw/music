@@ -14,8 +14,8 @@ const ArtistDetail = () => {
       <div className="  relative z-20 p-6   text-white  ">
         <img
           src={data?.data.artist_image}
-          className=" w-[150px] bg-cover h-[150px] "
-          alt=""
+          className=" w-[150px] object-cover rounded-md h-[150px] "
+          alt={data?.data.artist}
         />
         <div className=" pt-4 pl-5">
           <div className="  mt-4 grid grid-cols-12 gap-5">

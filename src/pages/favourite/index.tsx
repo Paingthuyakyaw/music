@@ -54,54 +54,60 @@ const Favourite = () => {
         </div>
       ) : (
         <>
-          <div className={`  mr-10 ${isOpen && "mb-40"}`}>
-            <div className=" flex items-center justify-between">
-              <h4 className=" text-white font-bold text-2xl ">All Songs</h4>
-            </div>
+          {data?.data?.length !== 0 ? (
+            <>
+              <div className={`  mr-10 ${isOpen && "mb-40"}`}>
+                <div className=" flex items-center justify-between">
+                  <h4 className=" text-white font-bold text-2xl ">All Songs</h4>
+                </div>
 
-            <div className=" mt-5 grid grid-cols-5 gap-5">
-              {data?.data.map((song: any, index: number) => {
-                return (
-                  <div className=" group relative" key={index}>
-                    <div
-                      onClick={() => handleSongClick(index)}
-                      key={index}
-                      className=" col-span-1"
-                    >
-                      <img
-                        src={song?.song_image}
-                        alt={song.name}
-                        className=" rounded-[10px] h-[180px] w-full object-cover"
-                      />
-                      <div className=" mt-4">
-                        <h5 className=" font-semibold  text-white/80 text-center">
-                          {song.name}
-                        </h5>
-                        <p className=" text-center text-white/60 text-sm ">
-                          {song.artist}
-                        </p>
-                      </div>
-                      {/* audio */}
-                    </div>
-
-                    {isOpen &&
-                      currentSongIndex === index &&
-                      currentSongIndex !== null && (
-                        <>
-                          <MusicPlayer
-                            song={data?.data[currentSongIndex]}
-                            isPlaying={isPlaying}
-                            setIsPlaying={setIsPlaying}
-                            playNext={playNext}
-                            playPrev={playPrev}
+                <div className=" mt-5 grid grid-cols-5 gap-5">
+                  {data?.data?.map((song: any, index: number) => {
+                    return (
+                      <div className=" group relative" key={index}>
+                        <div
+                          onClick={() => handleSongClick(index)}
+                          key={index}
+                          className=" col-span-1"
+                        >
+                          <img
+                            src={song?.song_image}
+                            alt={song.name}
+                            className=" rounded-[10px] h-[180px] w-full object-cover"
                           />
-                        </>
-                      )}
-                  </div>
-                );
-              })}
-            </div>
-          </div>
+                          <div className=" mt-4">
+                            <h5 className=" font-semibold  text-white/80 text-center">
+                              {song.name}
+                            </h5>
+                            <p className=" text-center text-white/60 text-sm ">
+                              {song.artist}
+                            </p>
+                          </div>
+                          {/* audio */}
+                        </div>
+
+                        {isOpen &&
+                          currentSongIndex === index &&
+                          currentSongIndex !== null && (
+                            <>
+                              <MusicPlayer
+                                song={data?.data[currentSongIndex]}
+                                isPlaying={isPlaying}
+                                setIsPlaying={setIsPlaying}
+                                playNext={playNext}
+                                playPrev={playPrev}
+                              />
+                            </>
+                          )}
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            </>
+          ) : (
+            <></>
+          )}
         </>
       )}
     </>

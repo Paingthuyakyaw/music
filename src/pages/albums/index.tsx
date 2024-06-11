@@ -8,10 +8,10 @@ const Albumns = () => {
 
   return (
     <div className=" grid gap-20 grid-cols-12">
-      {data?.data.map((item) => (
+      {data?.data?.map((item) => (
         <div
           style={{ borderRadius: 10 }}
-          className=" reflect bg-white col-span-3 rounded-lg "
+          className="  bg-white col-span-3 rounded-lg "
           key={item.id}
         >
           <Link to={`/albumns/${item.id}`}>

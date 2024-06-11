@@ -4,10 +4,9 @@ import { Link } from "react-router-dom";
 const Artist = () => {
   const { data } = useArtist();
 
-
   return (
     <div className=" grid grid-cols-12">
-      {data?.data.map((art) => (
+      {data?.data?.map((art) => (
         <div key={art.id} className=" col-span-3">
           <Link to={`/artist/${art.id}`}>
             <img
